@@ -12,8 +12,8 @@ class _CurrencyConverterMaterialPageState extends State {
   // void initState(){ // called before the build function
   //   super.initState();
   // }
-    double result = 0;
-    final TextEditingController textEditingController = TextEditingController();
+  double result = 0;
+  final TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,28 +28,29 @@ class _CurrencyConverterMaterialPageState extends State {
         centerTitle: true,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              result.toString(),
-              style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 255, 255, 255),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "PKR ${result.toStringAsFixed(2)}",
+                style: TextStyle(
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
               ),
-            ),
-            // padding and container
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-              child: TextField(
+              const SizedBox(height: 10),
+              // padding and container
+              TextField(
                 controller: textEditingController,
                 keyboardType: TextInputType.numberWithOptions(
                   decimal: true,
                 ),
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
-                  hintText: "Please enter amount in PKR",
+                  hintText: "Please enter amount in USD",
                   hintStyle: TextStyle(color: Colors.black),
                   prefixIcon: Icon(Icons.monetization_on),
                   prefixIconColor: Colors.grey,
@@ -73,57 +74,31 @@ class _CurrencyConverterMaterialPageState extends State {
                   ),
                 ),
               ),
-            ),
-            Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                child: ElevatedButton(
-                  onPressed: () {
-                    setState((){
-                      result = double.parse(textEditingController.text) * 278.80;
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    foregroundColor: Colors.white,
-                    minimumSize: Size(
-                      double.infinity,
-                      50,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Colors.black,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    result = double.parse(textEditingController.text) * 278.80;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  minimumSize: Size(
+                    double.infinity,
+                    50,
                   ),
-                  child: Text("Convert"),
-                )
-                // child: ElevatedButton(
-                //   style: ButtonStyle(
-                //     backgroundColor: WidgetStatePropertyAll(Colors.black),
-                //     foregroundColor: WidgetStatePropertyAll(Colors.white),
-                //     minimumSize: WidgetStatePropertyAll(
-                //       Size(
-                //         double.infinity,
-                //         50,
-                //       ),
-                //     ),
-                //     shape: WidgetStatePropertyAll(
-                //       RoundedRectangleBorder(
-                //         side: BorderSide(
-                //           color: Colors.black,
-                //         ),
-                //         borderRadius: BorderRadius.circular(10),
-                //       ),
-                //     ),
-                //   ),
-                //   onPressed: () => debugPrint("button clicked"),
-                //   child: const Text(
-                //     "Convert",
-                //   ),
-                // ),
-                )
-          ],
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: Colors.black,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text("Convert"),
+              )
+            ],
+          ),
         ),
       ),
       backgroundColor: Colors.blueGrey,
